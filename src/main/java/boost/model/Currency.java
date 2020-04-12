@@ -1,27 +1,17 @@
 package boost.model;
 
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
-@Entity
 @Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
-@Table(name = "Currency")
+@Embeddable
 public class Currency {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", updatable = false, nullable = false)
-    Long id;
-    String currencyCode;
-    BigDecimal currencyRate;
-    String currencyBase;
-    Date date;
-    }
+    @Column(name = "currency")
+    private String currencyCode;
+    private BigDecimal currencyRate;
+}

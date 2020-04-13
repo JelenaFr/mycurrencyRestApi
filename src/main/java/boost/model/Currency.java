@@ -12,6 +12,6 @@ import java.math.BigDecimal;
 @Embeddable
 public class Currency {
     @Column(name = "currency")
-    private String currencyCode;
+    private String code;
     private BigDecimal currencyRate;
 }

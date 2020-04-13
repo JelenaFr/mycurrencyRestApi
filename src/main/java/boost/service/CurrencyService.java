@@ -5,6 +5,7 @@ import boost.model.CurrencyRate;
 import boost.repo.CurrencyRateRepo;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,8 +23,8 @@ public class CurrencyService {
     public CurrencyRate save (CurrencyRate currencyRate){
         return currencyRateRepo.save(currencyRate);
     }
-    public Iterable<CurrencyRate> save(List<CurrencyRate> allRates) {
-        return currencyRateRepo.save(allRates);
+    public Iterable<CurrencyRate> save(ArrayList<CurrencyRate> allRates) {
+        return currencyRateRepo.saveAll(allRates);
     }
 
 

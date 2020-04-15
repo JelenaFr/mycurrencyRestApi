@@ -21,6 +21,4 @@ public class CurrencyRateController {
     public Iterable<CurrencyRate> list(){
         return currencyService.list();
     }
-
-
 }

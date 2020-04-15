@@ -1,26 +1,31 @@
 package boost.model;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+
+import lombok.*;
+
 
 import javax.persistence.*;
 import java.util.Date;
+
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table (name = "currency")
 public class CurrencyRate {
 
     @Id
+    @NonNull
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Embedded
+    @NonNull
     private Currency currency;
+    @NonNull
     private String currencyBase;
+    @NonNull
     private Date date;
 
     public CurrencyRate(Currency currency, String currencyBase, Date date) {

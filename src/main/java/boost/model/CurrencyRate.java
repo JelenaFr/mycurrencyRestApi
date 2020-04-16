@@ -6,6 +6,9 @@ import lombok.*;
 
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -13,7 +16,9 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table (name = "currency")
+@Table
+@ToString(of = {"id", "code","rate","base","date"})
+@EqualsAndHashCode(of = {"id"})
 public class CurrencyRate {
 
     @Id
@@ -25,13 +30,16 @@ public class CurrencyRate {
     private Currency currency;
     @NonNull
     private String currencyBase;
-    @NonNull
+
+    @Column(updatable =  false)
     private Date date;
 
-    public CurrencyRate(Currency currency, String currencyBase, Date date) {
+    public CurrencyRate(Currency currency, String base, Date date) {
         this.currency = currency;
-        this.currencyBase = currencyBase;
+        this.currencyBase = base;
         this.date = date;
     }
+
+
 }
 

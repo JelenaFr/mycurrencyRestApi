@@ -11,9 +11,8 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Embeddable
 public class Currency {
-    @Column(name = "currency")
     @NonNull
     private String code;
     @NonNull
-    private BigDecimal currencyRate;
+    private BigDecimal rate;
 }

@@ -42,11 +42,8 @@ Vue.component('currencyRate-form', {
         '</div>',
     methods: {
         save: function () {
-            var currencyRate = {code: this.code};
-            var currencyRate = {rate: this.rate};
-            var currencyRate = {base: this.base};
-            var currencyRate = {date: this.date};
 
+            var currencyRate = {code: this.currency.code, rate: this.currency.rate, base: this.base, date: this.date};
 
 
             if (this.id) {

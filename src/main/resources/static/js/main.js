@@ -42,8 +42,9 @@ Vue.component('currencyRate-form', {
         '</div>',
     methods: {
         save: function () {
+            var currencyRate = {code: this.code, rate: this.rate, base: this.base, date: this.date  };
+          
 
-            var currencyRate = {code: this.currency.code, rate: this.currency.rate, base: this.base, date: this.date};
 
 
             if (this.id) {
@@ -110,13 +111,6 @@ Vue.component('currencyRates-list', {
         '<currencyRate-row v-for="currencyRate in currencyRates" :key= "currencyRate.id" :currencyRate="currencyRate" '+
         ' :editMethod="editMethod" :currencyRates="currencyRates"/>' +
         '</div>',
-    created: function () {
-        currencyRateApi.get().then(result =>
-            result.json().then(data =>
-                data.forEach(currencyRate => this.currencyRates.push(currencyRate))
-            )
-        )
-    },
 
     methods: {
         editMethod: function (currencyRate) {
@@ -133,5 +127,11 @@ var app = new Vue({
     data: {
         currencyRates: []
     },
-
+    created: function () {
+        currencyRateApi.get().then(result =>
+            result.json().then(data =>
+                data.forEach(currencyRate => this.currencyRates.push(currencyRate))
+            )
+        )
+    },
 });

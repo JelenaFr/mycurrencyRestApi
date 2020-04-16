@@ -42,26 +42,24 @@ Vue.component('currencyRate-form', {
         '</div>',
     methods: {
         save: function () {
-            var currencyRate = {code: this.code, rate: this.rate, base: this.base, date: this.date  };
-          
-
+            var currencyRate = {currency:{code: this.code, rate: this.rate}, base: this.base, date: this.date};
 
 
             if (this.id) {
                 currencyRateApi.update({id: this.id}, currencyRate).then(result =>
-                result.json().then(data =>{
-                    var index = getIndex(this.currencyRates, data.id);
-                    this.currencyRates.splice(index, 1, data);
-                    this.code = ''
-                    this.rate = ''
-                    this.base = ''
-                    this.date = ''
-                    this.id = ''
-                })
+                    result.json().then(data =>{
+                        var index = getIndex(this.currencyRates, data.id);
+                        this.currencyRates.splice(index, 1, data);
+                        this.code = ''
+                        this.rate = ''
+                        this.base = ''
+                        this.date = ''
+                        this.id = ''
+                    })
                 )
             } else {
                 currencyRateApi.save({}, currencyRate).then(result =>
-                    result.json().then(date => {
+                    result.json().then(data => {
                         this.currencyRates.push(data);
                         this.code = ''
                         this.rate = ''

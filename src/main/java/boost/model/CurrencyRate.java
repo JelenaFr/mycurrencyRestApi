@@ -18,7 +18,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table
-@ToString
+@ToString(of = {"id", "base","date"})
 @EqualsAndHashCode(of = {"id"})
 public class CurrencyRate {
 
@@ -27,7 +27,6 @@ public class CurrencyRate {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Embedded
-    @NonNull
     private Currency currency;
     @NonNull
     private String base;

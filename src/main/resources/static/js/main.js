@@ -43,7 +43,7 @@ Vue.component('currencyRate-form', {
         '</div>',
     methods: {
         save: function () {
-            var currencyRate = {code: this.code};
+            var currencyRate = {code: this.code, };
             var currencyRate = {rate: this.rate};
             var currencyRate = {base: this.base};
             var currencyRate = {date: this.date};
@@ -78,7 +78,7 @@ Vue.component('currencyRate-form', {
 });
 
 Vue.component('currencyRate-row', {
-    props: ['currencyRate', 'editMethod',"currencyRates"],
+    props: ['currencyRate', 'editMethod',"currencyRates" ],
     template: '<div>' +
         '<i>({{ currencyRate.id }})</i>{{ currencyRate.currency.code }}{{ currencyRate.currency.rate }}{{ currencyRate.base }}{{ currencyRate.date }}' +
         '<span style="position: absolute; right: 0">' +
@@ -89,11 +89,12 @@ Vue.component('currencyRate-row', {
     methods: {
         edit: function () {
             this.editMethod(this.currencyRate)
+
         },
         del: function () {
             currencyRateApi.remove({id: this.currencyRate.id}).then(result =>{
                 if (result.ok){
-                    this.currencyRates.slice(this.currencyRates.indexOf(this.currencyRate), 1)
+                    this.currencyRates.splice(this.currencyRates.indexOf(this.currencyRate), 1)
                 }
             })
 
@@ -105,7 +106,7 @@ Vue.component('currencyRates-list', {
     props: ['currencyRates'],
     data: function () {
         return {
-            currencyRates: null
+            currencyRate: null
         }
     },
     template: '<div style="position: relative; width: 500px;">' +

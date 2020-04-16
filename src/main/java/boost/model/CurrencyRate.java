@@ -18,7 +18,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table
-@ToString(of = {"id", "code","rate","base","date"})
+@ToString(of = {"id", "base","date"})
 @EqualsAndHashCode(of = {"id"})
 public class CurrencyRate {
 

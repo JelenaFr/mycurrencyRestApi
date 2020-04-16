@@ -35,10 +35,10 @@ Vue.component('currencyRate-form', {
     },
     template:
         '<div>' +
-        '<div><input type="code" placeholder="Write code" v-model="code" />' +
-        '<div><input type="rate" placeholder="Write rate" v-model="rate" />' +
-        '<div><input type="base" placeholder="Write base" v-model="base" />' +
-        '<div><input type="date" placeholder="Write date" v-model="date" />' +
+        '<div><input type="code" placeholder="Write code" v-model="code" /></div>' +
+        '<div><input type="rate" placeholder="Write rate" v-model="rate" /></div>' +
+        '<div><input type="base" placeholder="Write base" v-model="base" /></div>' +
+        '<div><input type="date" placeholder="Write date" v-model="date" /></div>' +
         '<input type="button" value="Save" @click="save" />' +
         '</div>',
     methods: {

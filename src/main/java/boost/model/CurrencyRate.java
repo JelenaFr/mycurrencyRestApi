@@ -2,6 +2,7 @@ package boost.model;
 
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 
@@ -29,14 +30,15 @@ public class CurrencyRate {
     @NonNull
     private Currency currency;
     @NonNull
-    private String currencyBase;
+    private String base;
 
     @Column(updatable =  false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date date;
 
     public CurrencyRate(Currency currency, String base, Date date) {
         this.currency = currency;
-        this.currencyBase = base;
+        this.base = base;
         this.date = date;
     }
 

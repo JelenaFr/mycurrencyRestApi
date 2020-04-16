@@ -13,7 +13,7 @@ function getIndex(list, id) {
 var currencyRateApi = Vue.resource('/currencyRate{/id}');
 
 Vue.component('currencyRate-form', {
-    props: ['currencyRate', 'currencyRateAttr'],
+    props: ['currencyRates', 'currencyRateAttr'],
     data: function () {
         return {
             code: '',
@@ -29,7 +29,6 @@ Vue.component('currencyRate-form', {
             this.rate = newVal.rate;
             this.base = newVal.base;
             this.date = newVal.date;
-
             this.id = newVal.id;
         }
     },
@@ -43,7 +42,7 @@ Vue.component('currencyRate-form', {
         '</div>',
     methods: {
         save: function () {
-            var currencyRate = {code: this.code, };
+            var currencyRate = {code: this.code};
             var currencyRate = {rate: this.rate};
             var currencyRate = {base: this.base};
             var currencyRate = {date: this.date};
@@ -114,6 +113,13 @@ Vue.component('currencyRates-list', {
         '<currencyRate-row v-for="currencyRate in currencyRates" :key= "currencyRate.id" :currencyRate="currencyRate" '+
         ' :editMethod="editMethod" :currencyRates="currencyRates"/>' +
         '</div>',
+    created: function () {
+        currencyRateApi.get().then(result =>
+            result.json().then(data =>
+                data.forEach(currencyRate => this.currencyRates.push(currencyRate))
+            )
+        )
+    },
 
     methods: {
         editMethod: function (currencyRate) {
@@ -130,11 +136,5 @@ var app = new Vue({
     data: {
         currencyRates: []
     },
-    created: function () {
-        currencyRateApi.get().then(result =>
-            result.json().then(data =>
-                data.forEach(currencyRate => this.currencyRates.push(currencyRate))
-            )
-        )
-    },
+
 });

@@ -31,9 +31,9 @@ public class DemoApplication {
             String rawJson = new RestTemplate().getForObject("https://api.exchangeratesapi.io/latest", String.class);
             ObjectMapper mapper = new ObjectMapper();
             JsonCurrencyResponse jsonResponse = mapper.readValue(rawJson, JsonCurrencyResponse.class);
-            System.out.println(jsonResponse.getRates());
-            System.out.println(jsonResponse.getBase());
-            System.out.println(jsonResponse.getDate());
+//            System.out.println(jsonResponse.getRates());
+//            System.out.println(jsonResponse.getBase());
+//            System.out.println(jsonResponse.getDate());
             //currencyService.save(new CurrencyRate(new Currency("EEK", BigDecimal.valueOf(15.6466)),"EUR",  new Date()));
 
 

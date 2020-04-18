@@ -1,55 +1,55 @@
 package boost.controller;
 
+import boost.model.Currency;
 import boost.model.CurrencyRate;
 import boost.repo.CurrencyRateRepo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.Calendar;
 import java.util.List;
 
 @RestController
+@Validated
 @RequestMapping("currencyRate")
 public class MainController {
 
     @Autowired
     CurrencyRateRepo currencyRateRepo;
 
-
-    @GetMapping
+      @GetMapping
     public List<CurrencyRate> list() {
         return currencyRateRepo.findAll();
     }
 
-
-    //    @GetMapping("{id}")
-//    Optional<CurrencyRate> findById(@PathVariable  Long id) {
-//        return currencyRateRepo.findById(id);
-//    }
     @GetMapping("{id}")
     public CurrencyRate getOne(@PathVariable("id") CurrencyRate currencyRate) {
         return currencyRate;
     }
-//    @PostMapping
-//    public Map<String, String> create(@ResponseBody CurrencyRate currencyRate){
-//        return currencyRateRepo.save(currencyRate);
-//    }
+
 
     @PostMapping
-    public CurrencyRate create(@RequestBody CurrencyRate currencyRate) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public CurrencyRate create(@Valid @RequestBody CurrencyRate currencyRate, Currency currency) {
         currencyRate.setDate(Date.from(Instant.now()));
+        currencyRate.setBase("EUR");
+
         return currencyRateRepo.save(currencyRate);
 
     }
 
     @PutMapping("{id}")
-    public CurrencyRate update(@PathVariable("id") CurrencyRate rateFromDB,
+    @ResponseStatus(HttpStatus.CREATED)
+    public CurrencyRate update(@Valid @PathVariable("id") CurrencyRate rateFromDB,
                                @RequestBody CurrencyRate currencyRate) {
+
+
+
         BeanUtils.copyProperties(currencyRate, rateFromDB, "id");
         return currencyRateRepo.save(rateFromDB);
     }

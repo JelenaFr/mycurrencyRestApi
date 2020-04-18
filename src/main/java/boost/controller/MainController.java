@@ -37,7 +37,7 @@ public class MainController {
     public CurrencyRate create(@Valid @RequestBody CurrencyRate currencyRate, Currency currency) {
         currencyRate.setDate(Date.from(Instant.now()));
         currencyRate.setBase("EUR");
-        currencyRate.getCurrency().setCode(currencyRate.getCurrency().getCode().toUpperCase());
+        //currencyRate.getCurrency().setCode(currencyRate.getCurrency().getCode().toUpperCase());
 
         return currencyRateRepo.save(currencyRate);
 

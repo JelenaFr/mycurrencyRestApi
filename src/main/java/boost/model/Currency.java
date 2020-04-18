@@ -23,7 +23,11 @@ public class Currency  {
     @DecimalMin(value = "0.0", inclusive = false, message="Rate must have positive number")
     private BigDecimal rate;
 
-
+    @PrePersist
+    @PreUpdate
+    public void codeToUpper() {
+        code = code.toUpperCase();
+    }
 
 
 }

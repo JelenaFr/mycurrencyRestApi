@@ -1,5 +1,4 @@
 
-
 function getIndex(list, id) {
     for (var i = 0; i<list.length; i++){
         if(list[i].id ===id){
@@ -29,8 +28,6 @@ Vue.component('currencyRate-form', {
         '<div>' +
         '<div><input type="code" placeholder="Write code" v-model="currencyRate.currency.code"  /></div>' +
         '<div><input type="rate" placeholder="Write rate" v-model="currencyRate.currency.rate"  /></div>' +
-        // '<div><input type="base" placeholder="Write base" v-model="currencyRate.base" /></div>' +
-        // '<div><input type="date" placeholder="Write date" v-model="currencyRate.date" /></div>' +
         '<input type="button" value="Save" @click="save" />' +
         '</div>',
     methods: {
@@ -54,6 +51,7 @@ Vue.component('currencyRate-form', {
         }
     }
 });
+
 
 Vue.component('currencyRate-row', {
     props: ['currencyRate', 'editMethod',"currencyRates" ],
@@ -79,6 +77,7 @@ Vue.component('currencyRate-row', {
     }
 });
 
+
 Vue.component('currencyRates-list', {
     props: ['currencyRates'],
     data: function () {
@@ -98,6 +97,7 @@ Vue.component('currencyRates-list', {
         }
     }
 });
+
 
 
 var app = new Vue({

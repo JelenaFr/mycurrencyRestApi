@@ -1,16 +1,10 @@
 package boost.model;
 
 
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
-
-
 import javax.persistence.*;
 import javax.validation.Valid;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Calendar;
 import java.util.Date;
 
 
@@ -19,7 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table
-@ToString(of = {"id", "base","date"})
+@ToString(of = {"id", "base", "date"})
 @EqualsAndHashCode(of = {"id"})
 public class CurrencyRate {
 
@@ -33,7 +27,7 @@ public class CurrencyRate {
     @NonNull
     private String base;
 
-    @Column(updatable =  false)
+    @Column(updatable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date date;
 
@@ -42,8 +36,5 @@ public class CurrencyRate {
         this.base = base;
         this.date = date;
     }
-
-
-
 }
 

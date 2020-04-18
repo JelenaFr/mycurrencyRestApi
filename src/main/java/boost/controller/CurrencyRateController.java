@@ -1,24 +1,55 @@
 package boost.controller;
 
-
+import boost.model.Currency;
 import boost.model.CurrencyRate;
-import boost.service.CurrencyService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import boost.repo.CurrencyRateRepo;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import javax.validation.Valid;
+import java.time.Instant;
+import java.util.Date;
+import java.util.List;
 
 @RestController
-@RequestMapping("/currencyrates")
+@RequestMapping("currencyRate")
 public class CurrencyRateController {
 
-    private CurrencyService currencyService;
+    @Autowired
+    CurrencyRateRepo currencyRateRepo;
 
-    public CurrencyRateController(CurrencyService currencyService) {
-        this.currencyService = currencyService;
+    @GetMapping
+    public List<CurrencyRate> list() {
+        return currencyRateRepo.findAll();
     }
 
-    @GetMapping("/list")
-    public Iterable<CurrencyRate> list(){
-        return currencyService.list();
+    @GetMapping("{id}")
+    public CurrencyRate getOne(@PathVariable("id") CurrencyRate currencyRate) {
+        return currencyRate;
     }
+
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public CurrencyRate create(@Valid @RequestBody CurrencyRate currencyRate, Currency currency) {
+        currencyRate.setDate(Date.from(Instant.now()));
+        currencyRate.setBase("EUR");
+        return currencyRateRepo.save(currencyRate);
+
+    }
+
+    @PutMapping("{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public CurrencyRate update(@PathVariable("id") CurrencyRate rateFromDB,
+                               @RequestBody CurrencyRate currencyRate) {
+        BeanUtils.copyProperties(currencyRate, rateFromDB, "id");
+        return currencyRateRepo.save(rateFromDB);
+    }
+
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable("id") CurrencyRate currencyRate) {
+        currencyRateRepo.delete(currencyRate);
+    }
+
 }

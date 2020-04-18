@@ -1,26 +1,29 @@
 package boost.model;
 
 
-import lombok.*;
-import javax.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import javax.persistence.Embeddable;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 
 @Data
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Embeddable
-public class Currency  {
+public class Currency {
     @NonNull
-    @Size(min=3, max=3, message="Code must have 3 characters")
-
+    @Size(min = 3, max = 3, message = "Code must have 3 characters")
     private String code;
+
     @NonNull
-    @DecimalMin(value = "0.0", inclusive = false, message="Rate must have positive number")
+    @DecimalMin(value = "0.0", inclusive = false, message = "Rate must have positive number")
     private BigDecimal rate;
 
     @PrePersist

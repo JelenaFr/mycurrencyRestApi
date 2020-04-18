@@ -7,6 +7,7 @@ import lombok.*;
 
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Calendar;
@@ -27,6 +28,7 @@ public class CurrencyRate {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Embedded
+    @Valid
     private Currency currency;
     @NonNull
     private String base;

@@ -15,7 +15,6 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@Validated
 @RequestMapping("currencyRate")
 public class MainController {
 
@@ -38,6 +37,7 @@ public class MainController {
     public CurrencyRate create(@Valid @RequestBody CurrencyRate currencyRate, Currency currency) {
         currencyRate.setDate(Date.from(Instant.now()));
         currencyRate.setBase("EUR");
+        currencyRate.getCurrency().setCode(currencyRate.getCurrency().getCode().toUpperCase());
 
         return currencyRateRepo.save(currencyRate);
 
@@ -45,7 +45,7 @@ public class MainController {
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public CurrencyRate update(@Valid @PathVariable("id") CurrencyRate rateFromDB,
+    public CurrencyRate update(@PathVariable("id") CurrencyRate rateFromDB,
                                @RequestBody CurrencyRate currencyRate) {
 
 

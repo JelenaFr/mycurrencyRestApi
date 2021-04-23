@@ -2,6 +2,7 @@ package boost.model;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -15,6 +16,7 @@ import java.util.Date;
 @Table
 @ToString(of = {"id", "base", "date"})
 @EqualsAndHashCode(of = {"id"})
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CurrencyRate {
 
     @Id

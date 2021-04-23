@@ -24,7 +24,7 @@ public class DemoApplication {
     @Bean
     CommandLineRunner runner(CurrencyRateRepo currencyRateRepo) {
         return args -> {
-            String rawJson = new RestTemplate().getForObject("https://api.exchangeratesapi.io/latest", String.class);
+            String rawJson = new RestTemplate().getForObject("http://api.exchangeratesapi.io/v1/latest?access_key=666c7f1b11f090a2f5e8e466bdcdd78e", String.class);
             ObjectMapper mapper = new ObjectMapper();
             JsonCurrencyResponse jsonResponse = mapper.readValue(rawJson, JsonCurrencyResponse.class);
 
